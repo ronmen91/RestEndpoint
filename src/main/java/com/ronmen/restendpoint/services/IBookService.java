@@ -2,6 +2,7 @@ package com.ronmen.restendpoint.services;
 
 import com.ronmen.restendpoint.persistence.entities.Book;
 import java.util.Collection;
+import java.util.Optional;
 import org.springframework.http.ResponseEntity;
 
 public interface IBookService {
@@ -23,7 +24,7 @@ public interface IBookService {
    * a header (Location) that the client can consult to learn
    * how the newly created record is referencable.
    */
-  Book addBook (String userId, Book book);
+  Optional<Book> addBook (String userId, Book book);
 
   /**
    * Read a book with the given userId and bookId
