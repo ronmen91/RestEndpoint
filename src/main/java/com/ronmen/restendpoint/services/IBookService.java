@@ -23,7 +23,7 @@ public interface IBookService {
    * a header (Location) that the client can consult to learn
    * how the newly created record is referencable.
    */
-  ResponseEntity<?> addBook (String userId, Book book);
+  Book addBook (String userId, Book book);
 
   /**
    * Read a book with the given userId and bookId
