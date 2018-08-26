@@ -1,6 +1,6 @@
-package com.ronmen.restEndpoint.persistence.repository;
+package com.ronmen.restendpoint.persistence.repository;
 
-import com.ronmen.restEndpoint.persistence.entities.Book;
+import com.ronmen.restendpoint.persistence.entities.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

@@ -1,6 +1,6 @@
-package com.ronmen.restEndpoint.services;
+package com.ronmen.restendpoint.services;
 
-import com.ronmen.restEndpoint.persistence.entities.User;
+import com.ronmen.restendpoint.persistence.entities.User;
 import org.springframework.http.HttpStatus;
 
 public interface IUserService {

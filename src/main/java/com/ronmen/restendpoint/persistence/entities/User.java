@@ -1,4 +1,4 @@
-package com.ronmen.restEndpoint.persistence.entities;
+package com.ronmen.restendpoint.persistence.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

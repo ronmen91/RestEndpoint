@@ -1,4 +1,4 @@
-package com.ronmen.restEndpoint;
+package com.ronmen.restendpoint;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

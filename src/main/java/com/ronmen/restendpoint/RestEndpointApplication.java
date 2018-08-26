@@ -1,9 +1,9 @@
-package com.ronmen.restEndpoint;
+package com.ronmen.restendpoint;
 
-import com.ronmen.restEndpoint.persistence.entities.Book;
-import com.ronmen.restEndpoint.persistence.entities.User;
-import com.ronmen.restEndpoint.persistence.repository.BookRepository;
-import com.ronmen.restEndpoint.persistence.repository.UserRepository;
+import com.ronmen.restendpoint.persistence.entities.Book;
+import com.ronmen.restendpoint.persistence.entities.User;
+import com.ronmen.restendpoint.persistence.repository.BookRepository;
+import com.ronmen.restendpoint.persistence.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

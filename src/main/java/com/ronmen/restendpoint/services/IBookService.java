@@ -1,6 +1,6 @@
-package com.ronmen.restEndpoint.services;
+package com.ronmen.restendpoint.services;
 
-import com.ronmen.restEndpoint.persistence.entities.Book;
+import com.ronmen.restendpoint.persistence.entities.Book;
 import java.util.Collection;
 import org.springframework.http.ResponseEntity;
 
