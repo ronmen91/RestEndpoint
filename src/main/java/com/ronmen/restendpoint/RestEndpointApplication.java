@@ -24,9 +24,9 @@ public class RestEndpointApplication {
 				Arrays.asList("rnemeth","ebotos","bkocsis","edroberts","takovacs","glaszlo")
 						.forEach(username -> {
 							User user = userRepository.save(new User(username, "password"));
-							bookRepository.save(new Book(user, "http://books.com/1/" + username, "Book 1"));
-							bookRepository.save(new Book(user, "http://books.com/2/" + username, "Book 2"));
-							bookRepository.save(new Book(user, "http://books.com/3/" + username, "Book 3"));
+							bookRepository.save(new Book(user, "http://books.com/" + username + "/1", "Book 1"));
+							bookRepository.save(new Book(user, "http://books.com/" + username + "/2", "Book 2"));
+							bookRepository.save(new Book(user, "http://books.com/" + username + "/3", "Book 3"));
 						});
 	}
 }
