@@ -33,6 +33,6 @@ public interface IBookService {
    * @param bookId
    * @return a {@Book}
    */
-  Book readBook(String userId, Long bookId);
+  Optional<Book> readBook(String userId, Long bookId);
 
 }

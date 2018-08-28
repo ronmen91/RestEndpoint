@@ -12,6 +12,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -41,8 +42,8 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 @SpringBootTest(classes = RestEndpointApplication.class)
 @WebAppConfiguration
 public class BookRestControllerTest {
-    private MediaType mediaType = new MediaType(MediaType.APPLICATION_JSON.getType(),
-            MediaType.APPLICATION_JSON.getSubtype(),
+    private MediaType mediaType = new MediaType(MediaTypes.HAL_JSON.getType(),
+            MediaTypes.HAL_JSON.getSubtype(),
             Charset.forName("utf8"));
 
     private MockMvc mockMvc;
@@ -106,13 +107,16 @@ public class BookRestControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(mediaType))
-                .andExpect(jsonPath("$", hasSize(3)))
-                .andExpect(jsonPath("$[0].id", is(this.books.get(0).getId().intValue())))
-                .andExpect(jsonPath("$[0].uri", is("http://books.com/" + userName + "/1")))
-                .andExpect(jsonPath("$[0].description", is("Description")))
-                .andExpect(jsonPath("$[1].id", is(this.books.get(1).getId().intValue())))
-                .andExpect(jsonPath("$[1].uri", is("http://books.com/" + userName + "/2")))
-                .andExpect(jsonPath("$[1].description", is("Description")));
+                .andExpect(jsonPath("$._embedded.bookList", hasSize(3)))
+                .andExpect(jsonPath("$._embedded.bookList[0].id", is(this.books.get(0).getId().intValue())))
+                .andExpect(jsonPath("$._embedded.bookList[0].uri", is("http://books.com/" + userName + "/1")))
+                .andExpect(jsonPath("$._embedded.bookList[0].description", is("Description")))
+                .andExpect(jsonPath("$._embedded.bookList[1].id", is(this.books.get(1).getId().intValue())))
+                .andExpect(jsonPath("$._embedded.bookList[1].uri", is("http://books.com/" + userName + "/2")))
+                .andExpect(jsonPath("$._embedded.bookList[1].description", is("Description")))
+                .andExpect(jsonPath("$._embedded.bookList[2].id", is(this.books.get(2).getId().intValue())))
+                .andExpect(jsonPath("$._embedded.bookList[2].uri", is("http://books.com/" + userName + "/3")))
+                .andExpect(jsonPath("$._embedded.bookList[2].description", is("Description")));
     }
 
     @Test

@@ -41,10 +41,10 @@ public class BookService implements IBookService {
   }
 
   @Override
-  public Book readBook(String userId, Long bookId) {
+  public Optional<Book> readBook(String userId, Long bookId) {
     this.userService.validateUser(userId);
-    return this.bookRepository
-        .findById(bookId)
-        .orElseThrow(() -> new BookNotFoundException(bookId));
+    return Optional.ofNullable(this.bookRepository
+            .findById(bookId)
+            .orElseThrow(() -> new BookNotFoundException(bookId)));
   }
 }
