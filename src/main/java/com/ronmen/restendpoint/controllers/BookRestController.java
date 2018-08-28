@@ -49,34 +49,34 @@ public class BookRestController {
     return root;
   }
 
-  @GetMapping(value = "/{userId}", produces = MediaTypes.HAL_JSON_VALUE)
-  Resources<Resource<Book>> readBooks(@PathVariable String userId) {
-    return  new Resources<>(this.bookService.readBooks(userId).stream()
-            .map(book -> toResource(book, userId))
+  @GetMapping(value = "/{userName}", produces = MediaTypes.HAL_JSON_VALUE)
+  Resources<Resource<Book>> readBooks(@PathVariable String userName) {
+    return  new Resources<>(this.bookService.readBooks(userName).stream()
+            .map(book -> toResource(book, userName))
             .collect(Collectors.toList()));
   }
 
-  @PostMapping("/{userId}")
-  ResponseEntity<?> add(@PathVariable String userId, @RequestBody Book book) {
-    return bookService.addBook(userId, book)
+  @PostMapping("/{userName}")
+  ResponseEntity<?> add(@PathVariable String userName, @RequestBody Book book) {
+    return bookService.addBook(userName, book)
         .map(savedBook -> ResponseEntity.created(
                 URI.create(
-                        toResource(savedBook, userId).getLink(Link.REL_SELF).getHref()))
+                        toResource(savedBook, userName).getLink(Link.REL_SELF).getHref()))
                 .build())
       .orElse(ResponseEntity.noContent().build());
   }
 
-  @GetMapping(value = "/{userId}/{bookId}", produces = MediaTypes.HAL_JSON_VALUE)
-  Resource<Book> readBook(@PathVariable String userId, @PathVariable Long bookId) {
-    return this.bookService.readBook(userId, bookId)
-            .map(book -> toResource(book, userId))
+  @GetMapping(value = "/{userName}/{bookId}", produces = MediaTypes.HAL_JSON_VALUE)
+  Resource<Book> readBook(@PathVariable String userName, @PathVariable Long bookId) {
+    return this.bookService.readBook(userName, bookId)
+            .map(book -> toResource(book, userName))
             .get();
   }
 
-  private static Resource<Book> toResource (Book book, String userId) {
+  private static Resource<Book> toResource (Book book, String userName) {
     return new Resource<>(book,
             new Link(book.getUri(), "book-uri"),
-            linkTo(methodOn(BookRestController.class).readBooks(userId)).withRel("books"),
-            linkTo(methodOn(BookRestController.class).readBook(userId, book.getId())).withSelfRel());
+            linkTo(methodOn(BookRestController.class).readBooks(userName)).withRel("books"),
+            linkTo(methodOn(BookRestController.class).readBook(userName, book.getId())).withSelfRel());
   }
 }

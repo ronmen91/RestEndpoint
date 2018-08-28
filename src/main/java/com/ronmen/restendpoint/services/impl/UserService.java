@@ -16,9 +16,9 @@ public class UserService implements IUserService {
   }
 
   @Override
-  public void validateUser(String userId) {
+  public void validateUser(String userName) {
     this.userRepository
-        .findByUsername(userId)
-        .orElseThrow(() -> new UserNotFoundException(userId));
+        .findByUsername(userName)
+        .orElseThrow(() -> new UserNotFoundException(userName));
   }
 }

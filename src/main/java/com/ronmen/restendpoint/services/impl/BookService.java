@@ -26,25 +26,25 @@ public class BookService implements IBookService {
   }
 
   @Override
-  public Collection<Book> readBooks(String userId) {
-    this.userService.validateUser(userId);
-    return this.bookRepository.findByUserUsername(userId);
+  public Collection<Book> readBooks(String userName) {
+    this.userService.validateUser(userName);
+    return this.bookRepository.findByUserUsername(userName);
   }
 
   @Override
-  public Optional<Book> addBook(String userId, Book book) {
-    this.userService.validateUser(userId);
-    Optional<User> user = this.userRepository.findByUsername(userId);
+  public Optional<Book> addBook(String userName, Book book) {
+    this.userService.validateUser(userName);
+    Optional<User> user = this.userRepository.findByUsername(userName);
 
     return Optional.of(this.bookRepository
         .save(new Book (user.get(), book.getUri(), book.getDescription())));
   }
 
   @Override
-  public Optional<Book> readBook(String userId, Long bookId) {
-    this.userService.validateUser(userId);
-    return Optional.ofNullable(this.bookRepository
-            .findById(bookId)
+  public Optional<Book> readBook(String userName, Long bookId) {
+    this.userService.validateUser(userName);
+    return Optional.of(this.bookRepository
+            .findByIdAndUserUsername(bookId, userName)
             .orElseThrow(() -> new BookNotFoundException(bookId)));
   }
 }

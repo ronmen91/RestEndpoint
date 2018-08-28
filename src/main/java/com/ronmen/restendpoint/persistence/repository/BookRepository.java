@@ -8,4 +8,6 @@ import java.util.Optional;
 
 public interface BookRepository extends JpaRepository<Book, Long> {
     Collection<Book> findByUserUsername(String username);
+
+    Optional<Book> findByIdAndUserUsername(Long bookId, String username);
 }
