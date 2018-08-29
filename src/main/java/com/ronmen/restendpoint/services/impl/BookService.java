@@ -37,7 +37,7 @@ public class BookService implements IBookService {
     Optional<User> user = this.userRepository.findByUsername(userName);
 
     return Optional.of(this.bookRepository
-        .save(new Book (user.get(), book.getUri(), book.getDescription())));
+        .save(new Book (user.get(), book.getDescription())));
   }
 
   @Override

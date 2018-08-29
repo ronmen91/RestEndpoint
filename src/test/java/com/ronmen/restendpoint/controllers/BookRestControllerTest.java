@@ -87,15 +87,15 @@ public class BookRestControllerTest {
         this.userRepository.deleteAllInBatch();
 
         this.user = userRepository.save(new User(userName, "password"));
-        this.books.add(bookRepository.save(new Book(user, "http://books.com/" + userName + "/1", "Description")));
-        this.books.add(bookRepository.save(new Book(user, "http://books.com/" + userName + "/2", "Description")));
-        this.books.add(bookRepository.save(new Book(user, "http://books.com/" + userName + "/3", "Description")));
+        this.books.add(bookRepository.save(new Book(user, "Description")));
+        this.books.add(bookRepository.save(new Book(user, "Description")));
+        this.books.add(bookRepository.save(new Book(user, "Description")));
     }
 
     @Test
     public void userNotFound() throws Exception {
         mockMvc.perform(post("/books/glaszlo")
-            .content(json(new Book(null, null, null)))
+            .content(json(new Book(null, null)))
             .contentType(mediaType))
             .andExpect(status().isNotFound()
         );
@@ -109,20 +109,16 @@ public class BookRestControllerTest {
                 .andExpect(content().contentType(mediaType))
                 .andExpect(jsonPath("$._embedded.bookList", hasSize(3)))
                 .andExpect(jsonPath("$._embedded.bookList[0].id", is(this.books.get(0).getId().intValue())))
-                .andExpect(jsonPath("$._embedded.bookList[0].uri", is("http://books.com/" + userName + "/1")))
                 .andExpect(jsonPath("$._embedded.bookList[0].description", is("Description")))
                 .andExpect(jsonPath("$._embedded.bookList[1].id", is(this.books.get(1).getId().intValue())))
-                .andExpect(jsonPath("$._embedded.bookList[1].uri", is("http://books.com/" + userName + "/2")))
                 .andExpect(jsonPath("$._embedded.bookList[1].description", is("Description")))
                 .andExpect(jsonPath("$._embedded.bookList[2].id", is(this.books.get(2).getId().intValue())))
-                .andExpect(jsonPath("$._embedded.bookList[2].uri", is("http://books.com/" + userName + "/3")))
                 .andExpect(jsonPath("$._embedded.bookList[2].description", is("Description")));
     }
 
     @Test
     public void add() throws Exception {
         String bookmarkJson = json(new Book(this.user,
-                "http://books/" + userName,
                 "Description"));
 
         this.mockMvc.perform(post("/books/" + userName)
@@ -137,7 +133,6 @@ public class BookRestControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(mediaType))
                 .andExpect(jsonPath("$.id", is(this.books.get(0).getId().intValue())))
-                .andExpect(jsonPath("$.uri", is("http://books.com/" + userName + "/1")))
                 .andExpect(jsonPath("$.description", is("Description")));
     }
 

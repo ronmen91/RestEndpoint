@@ -53,7 +53,8 @@ public class BookRestController {
   Resources<Resource<Book>> readBooks(@PathVariable String userName) {
     return  new Resources<>(this.bookService.readBooks(userName).stream()
             .map(book -> toResource(book, userName))
-            .collect(Collectors.toList()));
+            .collect(Collectors.toList()),
+            linkTo(methodOn(BookRestController.class).readBooks(userName)).withSelfRel());
   }
 
   @PostMapping("/{userName}")
@@ -75,7 +76,6 @@ public class BookRestController {
 
   private static Resource<Book> toResource (Book book, String userName) {
     return new Resource<>(book,
-            new Link(book.getUri(), "book-uri"),
             linkTo(methodOn(BookRestController.class).readBooks(userName)).withRel("books"),
             linkTo(methodOn(BookRestController.class).readBook(userName, book.getId())).withSelfRel());
   }

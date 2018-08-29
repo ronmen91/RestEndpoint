@@ -17,15 +17,12 @@ public class Book {
     @ManyToOne
     private User user;
 
-    private String uri;
-
     private String description;
 
     private Book() {}
 
-    public Book(User user, String uri, String description) {
+    public Book(User user, String description) {
         this.user = user;
-        this.uri = uri;
         this.description = description;
     }
 
@@ -35,10 +32,6 @@ public class Book {
 
     public String getDescription() {
         return description;
-    }
-
-    public String getUri() {
-        return uri;
     }
 
     public User getUser() {
