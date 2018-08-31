@@ -100,8 +100,4 @@ a `ControllerAdvice` advice creates a hypermedia-supporting error container
 ## How to launch the applicaiton
 From the root folder run the following command 
 
-`mvn clean spring-boot:run`
-
-## Local Development perequisites
-The following prerequisites are required on your machine
-- Maven 3 
+`mvnw clean spring-boot:run`
